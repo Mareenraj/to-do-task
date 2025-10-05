@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
-import { addTask, fetchAllTasks, updateTaskStatus } from "./services/taskApi";
+import { addTask, fetchRecentTasks, updateTaskStatus } from "./services/taskApi";
 import type { TaskRequest, TaskResponse } from "./types";
+import "./App.css";
 
 const App: React.FC = () => {
 
@@ -15,7 +16,7 @@ const App: React.FC = () => {
       try {
         setLoading(true);
         setError(null);
-        const fetchedTasks = await fetchAllTasks();
+        const fetchedTasks = await fetchRecentTasks();
         setTasks(fetchedTasks);
       } catch (err) {
         setError('Failed to load tasks. Please try again.');
@@ -26,7 +27,7 @@ const App: React.FC = () => {
     };
 
     loadTasks();
-  }, []); 
+  }, []);
 
   const handleAddTask = async (title: string, description: string) => {
     try {
@@ -34,7 +35,7 @@ const App: React.FC = () => {
       const taskData: TaskRequest = { title, description };
       await addTask(taskData);
 
-      const updatedTasks = await fetchAllTasks();
+      const updatedTasks = await fetchRecentTasks();
       setTasks(updatedTasks);
     } catch (err) {
       setError('Failed to add task. Please try again.');
@@ -50,7 +51,7 @@ const App: React.FC = () => {
 
       await updateTaskStatus(id, !taskToUpdate.completed);
 
-      const updatedTasks = await fetchAllTasks();
+      const updatedTasks = await fetchRecentTasks();
       setTasks(updatedTasks);
     } catch (err) {
       setError('Failed to update task. Please try again.');
@@ -60,22 +61,21 @@ const App: React.FC = () => {
 
   if (loading) {
     return (
-      <div>
-        <h1>To Do App</h1>
-        <p>Loading tasks...</p>
+      <div className="app-wrapper">
+        <h1 className="app-header">To Do App</h1>
+        <p className="loading-message">Loading tasks...</p>
       </div>
     );
   }
 
   return (
-    <div>
-      <h1>To Do App</h1>
-      {error && <p>{error}</p>}
-
-      <TaskForm onAdd={handleAddTask} />
-      <TaskList tasks={tasks} onToggleComplete={handleToggleComplete} />
+    <div className="app-wrapper">
+      {error && <p className="error-message">{error}</p>}
+      <div className="main-layout">
+        <TaskForm onAdd={handleAddTask} />
+        <TaskList tasks={tasks} onToggleComplete={handleToggleComplete} />
+      </div>
     </div>
   );
 };
-
 export default App;

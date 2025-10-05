@@ -14,7 +14,7 @@ export const addTask = async (taskRequest: TaskRequest): Promise<string> => {
     return data;
 }
 
-export const fetchAllTasks = async (): Promise<TaskResponse[]> => {
+export const fetchRecentTasks = async (): Promise<TaskResponse[]> => {
     const { data } = await api.get<TaskResponse[]>("/task");
     return data;
 }

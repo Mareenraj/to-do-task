@@ -1,5 +1,6 @@
 import React from 'react';
 import type { TaskResponse } from '../types';
+import "../styles/TaskList.css";
 
 interface TaskListProps {
     tasks: TaskResponse[];
@@ -8,22 +9,23 @@ interface TaskListProps {
 
 const TaskList: React.FC<TaskListProps> = ({ tasks, onToggleComplete }) => {
     return (
-        <div>  { }
+        <div className="task-list">
             {tasks.map((task) => (
-                <div key={task.id}>
-                    <div>
+                <div key={task.id} className={`task-card ${task.completed ? 'completed' : ''}`}>
+                    <div className="task-header">
                         <div>
-                            <h3>
+                            <h3 className={`task-title ${task.completed ? 'completed' : ''}`}>
                                 {task.title}
                             </h3>
                             {task.description && (
-                                <p>
+                                <p className={`task-description ${task.completed ? 'completed' : ''}`}>
                                     {task.description}
                                 </p>
                             )}
                         </div>
                         <button
                             onClick={() => onToggleComplete(task.id)}
+                            className={`done-button ${task.completed ? 'completed' : ''}`}
                         >
                             {task.completed ? 'Undo' : 'Done'}
                         </button>

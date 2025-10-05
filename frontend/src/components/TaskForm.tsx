@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import "../styles/TaskForm.css";
 
 interface TaskFormProps {
     onAdd: (title: string, description: string) => void;
@@ -16,13 +17,11 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAdd }) => {
     };
 
     return (
-        <div>
-            <h2>Add a Task</h2>
+        <div className="form-card">
+            <h2 className="form-title">Add a Task</h2>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="title">
-                        Title
-                    </label>
+                <div className="form-group">
+                    <label htmlFor="title">Title</label>
                     <input
                         type="text"
                         id="title"
@@ -32,10 +31,8 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAdd }) => {
                         required
                     />
                 </div>
-                <div>
-                    <label htmlFor="description">
-                        Description
-                    </label>
+                <div className="form-group">
+                    <label htmlFor="description">Description</label>
                     <textarea
                         id="description"
                         value={description}
@@ -43,9 +40,7 @@ const TaskForm: React.FC<TaskFormProps> = ({ onAdd }) => {
                         placeholder="Enter task description (optional)"
                     />
                 </div>
-                <button type="submit">
-                    Add
-                </button>
+                <button type="submit" className="add-button">Add</button>
             </form>
         </div>
     );

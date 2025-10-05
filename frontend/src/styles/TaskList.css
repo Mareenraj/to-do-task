@@ -1,0 +1,72 @@
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.task-card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow);
+    transition: opacity 0.2s;
+}
+
+.task-card.completed {
+    opacity: 0.6;
+}
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.task-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.task-title.completed {
+    text-decoration: line-through;
+    color: #9ca3af;
+}
+
+.task-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.task-description.completed {
+    text-decoration: line-through;
+}
+
+.done-button {
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition:
+        background-color 0.25s ease,
+        transform 0.15s ease,
+        box-shadow 0.25s ease;
+}
+
+.done-button:hover {
+    background-color: color-mix(in srgb, var(--secondary-color) 90%, white);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.done-button:active {
+    background-color: color-mix(in srgb, var(--secondary-color) 85%, black);
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+}
