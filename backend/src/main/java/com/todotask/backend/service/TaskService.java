@@ -33,12 +33,6 @@ public class TaskService {
         return "Task created successfully";
     }
 
-    public TaskResponse getTaskById(Long id) {
-        Task task = taskRepository.findTaskByIdAndCompletedIsFalse(id)
-                .orElseThrow(() -> new ResourceNotFoundException("No uncompleted task found with ID: " + id));
-        return taskMapper.mapToResponse(task);
-    }
-
     public List<TaskResponse> findRecentIncomplete() {
         Pageable pageable = PageRequest.of(0, 5, Sort.by("createdAt").descending());
         List<Task> taskList = taskRepository.findByCompletedFalseOrderByCreatedAtDesc(pageable);

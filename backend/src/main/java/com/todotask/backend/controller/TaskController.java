@@ -25,12 +25,6 @@ public class TaskController {
         return ResponseEntity.ok(successMessage);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<TaskResponse> getTaskById(@PathVariable Long id) {
-        TaskResponse taskResponse = taskService.getTaskById(id);
-        return ResponseEntity.ok(taskResponse);
-    }
-
     @GetMapping
     public ResponseEntity<List<TaskResponse>> getAllTasks() {
         List<TaskResponse> taskResponseList = taskService.findRecentIncomplete();
