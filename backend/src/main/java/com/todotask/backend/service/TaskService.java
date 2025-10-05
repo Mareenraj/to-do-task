@@ -8,6 +8,9 @@ import com.todotask.backend.exception.ResourceNotFoundException;
 import com.todotask.backend.mapper.TaskMapper;
 import com.todotask.backend.repository.TaskRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,8 +39,9 @@ public class TaskService {
         return taskMapper.mapToResponse(task);
     }
 
-    public List<TaskResponse> findAll() {
-        List<Task> taskList = taskRepository.findAllByCompletedIsFalse();
+    public List<TaskResponse> findRecentIncomplete() {
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("createdAt").descending());
+        List<Task> taskList = taskRepository.findByCompletedFalseOrderByCreatedAtDesc(pageable);
         return taskMapper.mapToResponseList(taskList);
     }
 

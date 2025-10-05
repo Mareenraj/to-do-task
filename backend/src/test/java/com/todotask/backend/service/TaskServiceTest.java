@@ -15,7 +15,7 @@ class TaskServiceTest {
     }
 
     @Test
-    void findAll() {
+    void findRecentIncomplete() {
     }
 
     @Test

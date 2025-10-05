@@ -33,7 +33,7 @@ public class TaskController {
 
     @GetMapping
     public ResponseEntity<List<TaskResponse>> getAllTasks() {
-        List<TaskResponse> taskResponseList = taskService.findAll();
+        List<TaskResponse> taskResponseList = taskService.findRecentIncomplete();
         return ResponseEntity.ok(taskResponseList);
     }
 
