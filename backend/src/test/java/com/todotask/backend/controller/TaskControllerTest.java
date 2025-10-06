@@ -7,10 +7,8 @@ import com.todotask.backend.exception.AlreadyUncompletedException;
 import com.todotask.backend.exception.ResourceNotFoundException;
 import com.todotask.backend.service.TaskService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
@@ -116,9 +114,5 @@ class TaskControllerTest {
                         .param("completed", "true"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().string(containsString("No uncompleted task found")));
-    }
-
-    private TaskResponse createMockTaskResponse(Long id, boolean completed) {
-        return new TaskResponse(id, "Mock Title " + id, "Mock Desc " + id, completed);
     }
 }
