@@ -1,5 +1,5 @@
 import React from 'react';
-import type { TaskResponse } from '../types';
+import type {TaskResponse} from '../types';
 import "../styles/TaskList.css";
 
 interface TaskListProps {
@@ -7,10 +7,12 @@ interface TaskListProps {
     onToggleComplete: (id: number) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, onToggleComplete }) => {
+const TaskList: React.FC<TaskListProps> = ({tasks, onToggleComplete}) => {
+    const uncompletedTasks = tasks.filter(task => !task.completed);
+
     return (
         <div className="task-list">
-            {tasks.map((task) => (
+            {uncompletedTasks.map((task) => (  // Map only uncompleted
                 <div key={task.id} className={`task-card ${task.completed ? 'completed' : ''}`}>
                     <div className="task-header">
                         <div>
@@ -32,6 +34,9 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, onToggleComplete }) => {
                     </div>
                 </div>
             ))}
+            {uncompletedTasks.length === 0 && (
+                <p>No active tasks found. Add a task to begin.</p>
+            )}
         </div>
     );
 };
